@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.github.wizonqalabs.pkg</groupId>
+    <artifactId>pkg-sample</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <url>https://github.com/wizonqalabs/pkg-sample</url>
+
+    <properties>
+        <java.version>14</java.version>
+        <sonar.jacoco.reportPaths>${project.basedir}/reports/jacoco.exec</sonar.jacoco.reportPaths>
+        <argLine>-Dfile.encoding=UTF-8 -Xdebug -Xnoagent --enable-preview</argLine>
+    </properties>
+
+    <organization>
+        <name>Wasiq Bhamla</name>
+        <url>https://github.com/WasiqB</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Wasiq Bhamla</name>
+            <email>wasbhamla2005@gmail.com</email>
+            <roles>
+                <role>Project Lead</role>
+                <role>Project Maintainer</role>
+            </roles>
+            <organization>WizonQA Labs</organization>
+            <organizationUrl>https://github.com/wizonqalabs</organizationUrl>
+            <timezone>+5.5</timezone>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/wizonqalabs/pkg-sample/issues</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:git@github.com:wizonqalabs/pkg-sample.git</connection>
+        <developerConnection>scm:git:git@github.com:wizonqalabs/pkg-sample.git</developerConnection>
+        <url>https://github.com/wizonqalabs/pkg-sample</url>
+    </scm>
+
+    <ciManagement>
+        <system>CircleCI</system>
+        <url>https://circleci.com/gh/wizonqalabs/pkg-sample</url>
+    </ciManagement>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.1.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub WizonQA Labs Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/wizonqalabs/pkg-sample</url>
+        </repository>
+    </distributionManagement>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <release>14</release>
+                    <compilerArgs>
+                        <arg>--enable-preview</arg>
+                    </compilerArgs>
+                    <forceJavacCompilerUse>true</forceJavacCompilerUse>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                    <properties>
+                        <property>
+                            <name>usedefaultlisteners</name>
+                            <value>false</value>
+                        </property>
+                    </properties>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <argLine>${argLine}</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>${sonar.jacoco.reportPaths}</destFile>
+                            <propertyName>surefireArgLine</propertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${sonar.jacoco.reportPaths}</dataFile>
+                            <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>verify-style</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <configLocation>${project.basedir}/checkstyle/checkstyle.xml</configLocation>
+                    <suppressionsLocation>${project.basedir}/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+                    <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                    <logViolationsToConsole>true</logViolationsToConsole>
+                    <failOnViolation>true</failOnViolation>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.duraspace</groupId>
+                        <artifactId>codestyle</artifactId>
+                        <version>1.0.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>8.29</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,5 @@
+fileignoreconfig:
+- filename: settings/settings.xml
+  checksum: adb4fc4c4930e49e885d3f5b58fac662241a869a072fe3c4fea60e26bf51151b
+  ignore_detectors: []
+scopeconfig: []
